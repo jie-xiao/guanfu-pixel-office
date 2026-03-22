@@ -371,19 +371,6 @@ function hideGameSkeleton() {
 }
 
 // ============================================================
-// Phaser.Game(config) — initialized at bottom of script
-// Fix: Update scene references after functions are defined
+// NOTE: Phaser.Game is created by inline-main.js (initGame)
+// DO NOT create Phaser.Game here - it would conflict
 // ============================================================
-window.__gameInitExecuted = true;
-window.config.scene = {
-    preload: window.preload,
-    create: window.create,
-    update: window.update
-};
-window.__scenePreloadType = typeof window.config.scene.preload;
-try {
-    new Phaser.Game(window.config);
-    window.__phaserCreated = true;
-} catch(e) {
-    window.__phaserError = e.message;
-}
